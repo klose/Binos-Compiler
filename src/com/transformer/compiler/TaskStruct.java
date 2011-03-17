@@ -4,11 +4,12 @@ public abstract class TaskStruct {
 	private String taskId;
 	private String[] inputPath;
 	private String[] outputPath;
-	TaskStruct(String id, String[] inputPath, String[] outputPath) {
-		this.taskId = id;
-		this.inputPath = inputPath;
-		this.outputPath = outputPath;
-	}
+	private static int inputPathNum;
+//	TaskStruct() {
+//		this.taskId = id;
+//		this.inputPath = inputPath;
+//		this.outputPath = outputPath;
+//	}
 	public String getTaskId() {
 		return taskId;
 	}

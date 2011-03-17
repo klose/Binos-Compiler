@@ -1,6 +1,7 @@
 package com.transformer.compiler;
 
 public class JobStruct {
+	private PhaseStruct[] ps;
 	public JobStruct() {
 		
 	}
