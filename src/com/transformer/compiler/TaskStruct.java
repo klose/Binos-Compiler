@@ -29,6 +29,6 @@ public abstract class TaskStruct {
 		this.outputPath = outputPath;
 	}
 	
-	public abstract void operation();
+	public abstract void operation(String[] inpath, String[] outpath);
 	
 }
