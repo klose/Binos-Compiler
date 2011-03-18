@@ -3,7 +3,7 @@ package com.transformer.compiler;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class TaskStruct {
+public  class TaskStruct {
 	private String taskId;
 	private String[] inputPath;
 	private String[] outputPath;
@@ -35,7 +35,7 @@ public class TaskStruct {
 	public void setOutputPath(String[] outputPath) {
 		this.outputPath = outputPath;
 	}
-	public abstract void operation(String[] inpath, String[] outpath);
+//	public abstract void operation(String[] inpath, String[] outpath);
 	public void setInputPathNum(int inputPathNum){
 		this.inputPathNum = inputPathNum;
 	}
@@ -54,17 +54,22 @@ public class TaskStruct {
 		this.depTaskId = new String[depNum];
 		Iterator it = this.depTaskIdList.iterator();
 		int i = 0;
+
 		while(it.hasNext()){
 			if(i+1 > depNum){
 				System.err.println("wrong in depdence task number");
 				System.exit(2);
 			}
 			this.depTaskId[i] = (String)it.next();
+			
 			i++;
 		}
 	}
 	public int getDepNum(){
 		return this.depNum;
+	}
+	public String[] getDepId(){
+		return this.depTaskId;
 	}
 	public void addDepTaskId(String id){
 		this.depTaskIdList.add(id);

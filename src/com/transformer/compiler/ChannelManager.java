@@ -91,6 +91,9 @@ public class ChannelManager {
 		}
 		
 		public static void main(String[] args){
+			/*
+			 * used for test.
+			 * */
 			TaskStruct ts1 = new TaskStruct();
 			ts1.setTaskId("1");
 			TaskStruct ts2 = new TaskStruct();
@@ -108,6 +111,12 @@ public class ChannelManager {
 			while(it.hasNext()){
 				TaskStruct ts = map.get((String)it.next());
 				System.out.println(ts.getTaskId() + ts.getDepNum()+ ts.getInputPathNum() + ts.getOutputPathNum());
+				if(ts.getDepId() != null){
+					for(int i = 0;i < ts.getDepId().length;i++){
+						System.out.println(ts.getDepId()[i]);
+					}
+				}
+				
 			}
 			
 			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
