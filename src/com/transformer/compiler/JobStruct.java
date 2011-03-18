@@ -7,6 +7,7 @@ public class JobStruct {
 	public JobStruct(ParallelLevel plevel) {
 		this.plevel = plevel;
 	}
+	
 	public void addPhaseStruct(PhaseStruct ps, ParallelLevel pl) {
 		
 	}

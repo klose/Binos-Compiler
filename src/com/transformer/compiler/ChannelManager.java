@@ -41,6 +41,7 @@ public class ChannelManager {
 				}
 				
 				TaskStruct tsTo = channel.getTo();
+				tsTo.addDepTaskId(tsFrom.getTaskId());
 				if(inputMap.containsKey(tsTo)){
 					int i = inputMap.get(tsTo).intValue();
 					inputMap.put(tsTo, Integer.valueOf(i+1));

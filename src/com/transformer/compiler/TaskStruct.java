@@ -1,6 +1,7 @@
 package com.transformer.compiler;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class TaskStruct {
 	private String taskId;
@@ -50,10 +51,22 @@ public class TaskStruct {
 	
 	public void setDepNum(int depNum){
 		this.depNum = depNum;
-		
+		this.depTaskId = new String[depNum];
+		Iterator it = this.depTaskIdList.iterator();
+		int i = 0;
+		while(it.hasNext()){
+			if(i+1 > depNum){
+				System.err.println("wrong in depdence task number");
+				System.exit(2);
+			}
+			this.depTaskId[i] = (String)it.next();
+			i++;
+		}
 	}
 	public int getDepNum(){
 		return this.depNum;
 	}
-	
+	public void addDepTaskId(String id){
+		this.depTaskIdList.add(id);
+	}
 }

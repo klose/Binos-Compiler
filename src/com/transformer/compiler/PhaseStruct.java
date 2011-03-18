@@ -18,7 +18,7 @@ public class PhaseStruct {
 	 * @param inputPath
 	 */
 	public void addTask(TaskStruct ts, int parallelNum, String[] path) {
-	
+		
 	}
 	/**
 	 * add the middle phase in job. These tasks are neither in the first level, 
