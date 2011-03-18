@@ -6,7 +6,9 @@ public final class ParallelLevel {
 	private static final int LevelEnd = -1;
 	private static final int LevelMiddleFactor = 1;
 	private final int level ;
-	
+	public ParallelLevel() {
+		this.level  = 0;
+	}
 	public ParallelLevel(int level) {
 		this.level = level;
 	}
