@@ -1,10 +1,16 @@
 package com.transformer.compiler;
 
-public abstract class TaskStruct {
+import java.util.ArrayList;
+
+public class TaskStruct {
 	private String taskId;
 	private String[] inputPath;
 	private String[] outputPath;
-	private static int inputPathNum;
+	private  int inputPathNum;
+	private  int outputPathNum;
+	private int depNum;
+	private String[] depTaskId;
+	private ArrayList<String> depTaskIdList = new ArrayList<String>();
 //	TaskStruct() {
 //		this.taskId = id;
 //		this.inputPath = inputPath;
@@ -29,6 +35,25 @@ public abstract class TaskStruct {
 		this.outputPath = outputPath;
 	}
 	
-	public abstract void operation();
+	public void setInputPathNum(int inputPathNum){
+		this.inputPathNum = inputPathNum;
+	}
+	public void setOutputPathNum(int outputPathNum){
+		this.outputPathNum = outputPathNum;
+	}
+	public int getInputPathNum(){
+		return this.inputPathNum;
+	}
+	public int getOutputPathNum(){
+		return this.outputPathNum;
+	}
+	
+	public void setDepNum(int depNum){
+		this.depNum = depNum;
+		
+	}
+	public int getDepNum(){
+		return this.depNum;
+	}
 	
 }

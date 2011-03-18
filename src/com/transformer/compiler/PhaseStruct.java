@@ -1,9 +1,13 @@
 package com.transformer.compiler;
 
 public class PhaseStruct {
-	
-	public PhaseStruct() {
-		
+	private TaskStruct ts;
+
+	private String phaseID;
+	private ParallelLevel plevel;
+	public PhaseStruct(String phaseID, ParallelLevel plevel) {
+		this.phaseID = phaseID;
+		this.plevel = plevel;
 	}
 	/**
 	 * add the first level's task Struct or last level's task struct. 
@@ -14,7 +18,7 @@ public class PhaseStruct {
 	 * @param inputPath
 	 */
 	public void addTask(TaskStruct ts, int parallelNum, String[] path) {
-		
+	
 	}
 	/**
 	 * add the middle phase in job. These tasks are neither in the first level, 

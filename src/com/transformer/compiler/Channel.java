@@ -19,4 +19,10 @@ public class Channel {
 		this.outputIndex = outputIndex;
 		this.trtype = trtype;
 	}
+	public TaskStruct getFrom(){
+		return this.from;
+	}
+	public TaskStruct getTo(){
+		return this.to;
+	}
 }
