@@ -1,8 +1,8 @@
 package com.transformer.compiler;
 
 public class PhaseStruct {
-	private TaskStruct ts;
-
+	private TaskStruct[] ts;
+	private int parallelNum;
 	private String phaseID;
 	private ParallelLevel plevel;
 	public PhaseStruct(String phaseID, ParallelLevel plevel) {
@@ -18,6 +18,29 @@ public class PhaseStruct {
 	 * @param inputPath
 	 */
 	public void addTask(TaskStruct ts, int parallelNum, String[] path) {
+		this.parallelNum = parallelNum;
+		this.ts = new TaskStruct[parallelNum];
+		if(path.length%parallelNum != 0){
+			System.out.println("the wrong input path or output path number.");
+			System.exit(2);
+		}
+		int k = path.length/parallelNum;
+		String[] tmppath = new String[k];
+		//TODO how to use one taskStruct to construct parallelNum tasks.and assign each task an id.and assign input or output paths.
+		for(int i = 0;i < this.parallelNum;i++){
+			this.ts[i] = ts;
+			this.ts[i].setTaskId(phaseID+"task"+i);
+			tmppath = PartitonPath.seqPart(parallelNum, path, i);
+			if(this.plevel.getLevel() == 0){
+				this.ts[i].setInputPathNum(k);
+				this.ts[i].setInputPath(tmppath);
+			}
+			else if(this.plevel.getLevel() == -1){
+				this.ts[i].setOutputPathNum(k);
+				this.ts[i].setOutputPath(tmppath);
+			}
+		}		
+		
 		
 	}
 	/**
@@ -27,7 +50,12 @@ public class PhaseStruct {
 	 * @param parallelNum
 	 */
 	public void addTask(TaskStruct ts, int parallelNum) {
-		
+		this.parallelNum = parallelNum;
+		this.ts = new TaskStruct[parallelNum];
+		for(int i=0; i< this.parallelNum;i++){
+			this.ts[i] = ts;
+			this.ts[i].setTaskId(phaseID+"task"+i);
+		}
 	}
 	
 }

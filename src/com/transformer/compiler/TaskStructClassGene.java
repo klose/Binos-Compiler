@@ -24,7 +24,7 @@ public class TaskStructClassGene {
 		System.exit(-1);
 	}
 	public static void main(String[] args)  {
-		Integer.valueOf(i) 
+		Integer.valueOf(i); 
 		if(args.length <= 5) {
 			printUsage();
 		}

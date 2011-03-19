@@ -5,7 +5,7 @@ public final class ParallelLevel {
 	private static final int LevelFirst = 0;
 	private static final int LevelEnd = -1;
 	private static final int LevelMiddleFactor = 1;
-	private static int level ;
+	private  int level ;
 	public ParallelLevel() {
 		this.level  = 0;
 	}
@@ -29,10 +29,10 @@ public final class ParallelLevel {
 	public  ParallelLevel currentLevel() {
 		return  new ParallelLevel(getLevel());
 	}	
-	public ParallelLevel assignNextLevel(ParallelLevel plevel) {
-		return new ParallelLevel(plevel.getLevel() + 1*LevelMiddleFactor);
-	}
+
 	public ParallelLevel nextLevel() {
 		return new ParallelLevel(level + 1); 
 	}
+	
+	
 }

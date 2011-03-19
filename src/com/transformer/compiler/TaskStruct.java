@@ -27,6 +27,7 @@ public  class TaskStruct {
 		return inputPath;
 	}
 	public void setInputPath(String[] inputPath) {
+		this.inputPath = new String[inputPath.length];
 		this.inputPath = inputPath;
 	}
 	public String[] getOutputPath() {
