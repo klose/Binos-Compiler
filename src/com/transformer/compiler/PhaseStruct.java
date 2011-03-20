@@ -28,6 +28,7 @@ public class PhaseStruct {
 		String[] tmppath = new String[k];
 		//TODO how to use one taskStruct to construct parallelNum tasks.and assign each task an id.and assign input or output paths.
 		for(int i = 0;i < this.parallelNum;i++){
+			this.ts[i] = new TaskStruct();
 			this.ts[i] = ts;
 			this.ts[i].setTaskId(phaseID+"task"+i);
 			tmppath = PartitonPath.seqPart(parallelNum, path, i);
@@ -53,9 +54,27 @@ public class PhaseStruct {
 		this.parallelNum = parallelNum;
 		this.ts = new TaskStruct[parallelNum];
 		for(int i=0; i< this.parallelNum;i++){
-			this.ts[i] = ts;
-			this.ts[i].setTaskId(phaseID+"task"+i);
+			this.ts[i] = new TaskStruct(ts);
+			//TODO passed by reference to passed by value
+			this.ts[i].setTaskId(phaseID+"_task"+i);
+		
+			
+			
+		}
+		for(int i=0;i<this.parallelNum;i++){
+			System.out.println(this.ts[i].getTaskId());
 		}
 	}
 	
+	public TaskStruct getTask(TaskStruct ts){
+		TaskStruct tss = new TaskStruct();
+		tss = ts;
+		return tss;
+	}
+	public TaskStruct[] getTaskStruct(){
+		return this.ts;
+	}
+	public int getParallelNum(){
+		return this.parallelNum;
+	}
 }

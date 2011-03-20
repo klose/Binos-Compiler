@@ -1,7 +1,9 @@
 package com.transformer.compiler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public  class TaskStruct {
 	private String taskId;
@@ -12,11 +14,23 @@ public  class TaskStruct {
 	private int depNum;
 	private String[] depTaskId;
 	private ArrayList<String> depTaskIdList = new ArrayList<String>();
+	private Map<String,Integer> depTaskMap = new HashMap<String, Integer>();
 //	TaskStruct() {
 //		this.taskId = id;
 //		this.inputPath = inputPath;
 //		this.outputPath = outputPath;
 //	}
+	public TaskStruct(){
+		
+	}
+	public TaskStruct(TaskStruct ts){
+		this.depNum = ts.getDepNum();
+		this.inputPath = ts.getInputPath();
+		this.outputPath = ts.getOutputPath();
+		this.inputPathNum = ts.getInputPathNum();
+		this.outputPathNum = ts.getOutputPathNum();
+		
+	}
 	public String getTaskId() {
 		return taskId;
 	}
@@ -72,6 +86,11 @@ public  class TaskStruct {
 	public String[] getDepId(){
 		return this.depTaskId;
 	}
+	
+	public void addMap(String taskId, int outputIndex){
+		this.depTaskMap.put(taskId, Integer.valueOf(outputIndex));
+	}
+	
 	public void addDepTaskId(String id){
 		this.depTaskIdList.add(id);
 	}

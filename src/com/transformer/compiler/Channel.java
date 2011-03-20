@@ -25,4 +25,10 @@ public class Channel {
 	public TaskStruct getTo(){
 		return this.to;
 	}
+	public int getOutputIndex(){
+		return this.outputIndex;
+	}
+	public int getInputIndex(){
+		return this.inputIndex;
+	}
 }
