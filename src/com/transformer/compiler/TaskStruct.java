@@ -15,6 +15,8 @@ public  class TaskStruct {
 	private String[] depTaskId;
 	private ArrayList<String> depTaskIdList = new ArrayList<String>();
 	private Map<String,Integer> depTaskMap = new HashMap<String, Integer>();
+	private String taskXmlPath;
+	private String taskJarPath;
 //	TaskStruct() {
 //		this.taskId = id;
 //		this.inputPath = inputPath;
@@ -33,9 +35,12 @@ public  class TaskStruct {
 	}
 	public String getTaskId() {
 		return taskId;
+		
 	}
 	public void setTaskId(String taskId) {
 		this.taskId = taskId;
+		this.taskXmlPath = System.getProperty("java.io.tmpdir")+"/"+this.taskId+"/"+this.taskId+".xml";
+		this.taskJarPath = System.getProperty("java.io.tmpdir")+"/"+this.taskId+"/"+this.taskId+".jar";
 	}
 	public String[] getInputPath() {
 		return inputPath;
@@ -85,6 +90,12 @@ public  class TaskStruct {
 	}
 	public String[] getDepId(){
 		return this.depTaskId;
+	}
+	public String getTaskXmlPath(){
+		return this.taskXmlPath;
+	}
+	public String getTaskJarPath(){
+		return this.taskJarPath;
 	}
 	
 	public void addMap(String taskId, int outputIndex){

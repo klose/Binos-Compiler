@@ -9,6 +9,8 @@ public class PhaseStruct {
 		this.phaseID = phaseID;
 		this.plevel = plevel;
 	}
+	
+	
 	/**
 	 * add the first level's task Struct or last level's task struct. 
 	 * In the first level, define path as the inputPath.
@@ -61,9 +63,9 @@ public class PhaseStruct {
 			
 			
 		}
-		for(int i=0;i<this.parallelNum;i++){
-			System.out.println(this.ts[i].getTaskId());
-		}
+//		for(int i=0;i<this.parallelNum;i++){
+//			System.out.println(this.ts[i].getTaskId());
+//		}
 	}
 	
 	public TaskStruct getTask(TaskStruct ts){

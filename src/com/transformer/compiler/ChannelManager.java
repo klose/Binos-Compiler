@@ -47,6 +47,7 @@ public class ChannelManager {
 					outputMap.put(tsFrom, Integer.valueOf(i+1));
 				}
 				else{
+					
 					/*stored tsFrom's output path number*/
 					outputMap.put(tsFrom, Integer.valueOf(1));
 				}
@@ -67,10 +68,10 @@ public class ChannelManager {
 			}
 			
 			/***************************/
-			System.out.println(outputMap.toString());
+	//		System.out.println(outputMap.toString());
 			/***************************/
 			/***************************/
-			System.out.println(inputMap.toString());
+//			System.out.println(inputMap.toString());
 			/***************************/
 			/*used for assigning inputPath and output path number for taskStructs*/
 			Set<TaskStruct> inputset = inputMap.keySet();
@@ -105,11 +106,14 @@ public class ChannelManager {
 						TaskStruct ts = finalList.get(outs.getTaskId());
 						ts.setOutputPathNum(outputPathNum);
 						String[] tmppath = new String[outputPathNum];
-						tmppath = InterNodePath.partitionInputPath(ts.getTaskId(),outputPathNum);
-						ts.setInputPath(tmppath);
+						tmppath = InterNodePath.partitionOutputPath(ts.getTaskId(),outputPathNum);
+						ts.setOutputPath(tmppath);
 						finalList.put(outs.getTaskId(), ts);
 					}
 					else{
+						String[] tmppath = new String[outputPathNum];
+						tmppath = InterNodePath.partitionOutputPath(outs.getTaskId(),outputPathNum);
+						outs.setOutputPath(tmppath);
 						finalList.put(outs.getTaskId(), outs);
 						
 					}
@@ -160,6 +164,16 @@ public class ChannelManager {
 				if(ts.getDepId() != null){
 					for(int i = 0;i < ts.getDepId().length;i++){
 						System.out.println(ts.getDepId()[i]);
+					}
+				}
+				if(ts.getInputPath() != null){
+					for(int i=0;i< ts.getInputPathNum();i++){
+						System.out.println(ts.getInputPath()[i]);
+					}
+				}
+				if(ts.getOutputPath() != null){
+					for(int i=0;i<ts.getOutputPathNum();i++){
+						System.out.println(ts.getOutputPath()[i]);
 					}
 				}
 				
