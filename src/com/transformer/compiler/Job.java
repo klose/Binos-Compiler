@@ -10,12 +10,14 @@ public class Job {
 		}
 		
 		/*parse the whole job struct and create job.xml, task.xml and task.jar files
-		 * @param this.job
+		 *@param this.job
 		 * */
 		public void run(){
 			ArrayList<PhaseStruct> phaseList = new ArrayList<PhaseStruct>();
 			phaseList = this.job.getPhaseStruct();
 			Iterator it = phaseList.iterator();
+			CreateJobXml cjx = new CreateJobXml();
+			CreateTaskXml ctx = new CreateTaskXml();
 			
 		}
 }

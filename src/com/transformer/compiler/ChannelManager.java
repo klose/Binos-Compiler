@@ -132,11 +132,11 @@ public class ChannelManager {
 			TaskStruct ts2 = new TaskStruct();			
 			TaskStruct ts3 = new TaskStruct();
 			ParallelLevel pal = new ParallelLevel();
-			PhaseStruct ps = new PhaseStruct("phase1", pal);
+			PhaseStruct ps = new PhaseStruct( pal);
 			ps.addTask(ts1, 4);
-			PhaseStruct ps2 = new PhaseStruct("phase2",pal.currentLevel());
+			PhaseStruct ps2 = new PhaseStruct(pal.currentLevel());
 			ps2.addTask(ts2, 3);
-			PhaseStruct ps3 = new PhaseStruct("phase3",pal.nextLevel());
+			PhaseStruct ps3 = new PhaseStruct(pal.nextLevel());
 			ps3.addTask(ts3, 1);
 			Channel[] channel1 = new Channel[ps.getParallelNum()];
 			Channel[] channel2 = new Channel[ps2.getParallelNum()];

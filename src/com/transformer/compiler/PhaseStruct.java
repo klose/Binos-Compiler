@@ -5,11 +5,14 @@ public class PhaseStruct {
 	private int parallelNum;
 	private String phaseID;
 	private ParallelLevel plevel;
-	public PhaseStruct(String phaseID, ParallelLevel plevel) {
-		this.phaseID = phaseID;
+	public PhaseStruct(ParallelLevel plevel) {
+		
 		this.plevel = plevel;
 	}
-	
+	public void setPhaseID(int phaseID){
+		String ph = String.valueOf(phaseID);
+		this.phaseID = plevel.getLevel()+"_"+ph;
+	}
 	
 	/**
 	 * add the first level's task Struct or last level's task struct. 
@@ -30,9 +33,8 @@ public class PhaseStruct {
 		String[] tmppath = new String[k];
 		//TODO how to use one taskStruct to construct parallelNum tasks.and assign each task an id.and assign input or output paths.
 		for(int i = 0;i < this.parallelNum;i++){
-			this.ts[i] = new TaskStruct();
-			this.ts[i] = ts;
-			this.ts[i].setTaskId(phaseID+"task"+i);
+			this.ts[i] = new TaskStruct(ts);
+			this.ts[i].setTaskId(phaseID+"_"+i);
 			tmppath = PartitonPath.seqPart(parallelNum, path, i);
 			if(this.plevel.getLevel() == 0){
 				this.ts[i].setInputPathNum(k);
@@ -53,12 +55,16 @@ public class PhaseStruct {
 	 * @param parallelNum
 	 */
 	public void addTask(TaskStruct ts, int parallelNum) {
+		if(this.phaseID == null){
+			System.err.println("please add the this phase to a job first!");
+			System.exit(2);
+		}
 		this.parallelNum = parallelNum;
 		this.ts = new TaskStruct[parallelNum];
 		for(int i=0; i< this.parallelNum;i++){
 			this.ts[i] = new TaskStruct(ts);
 			//TODO passed by reference to passed by value
-			this.ts[i].setTaskId(phaseID+"_task"+i);
+			this.ts[i].setTaskId(phaseID+"_"+i);
 		
 			
 			
