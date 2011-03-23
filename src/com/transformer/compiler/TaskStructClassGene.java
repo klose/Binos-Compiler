@@ -3,7 +3,16 @@ package com.transformer.compiler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-
+/**
+ * TaskStructClassGene is used for generating the runnable jar. 
+ * Implement the interface of Operation, and realize the function of operate.
+ * Version 0.2: public void operate(String[] inputPath, String[] outputPath)
+ * The interface will provide more interface in next iteration of development.
+ * Developers only care the target of the application, and finish the core operate in
+ * the interface Operation.
+ * @author jiangbing
+ *
+ */
 public class TaskStructClassGene {
 	private String className;
 	public TaskStructClassGene(String className) {
@@ -23,9 +32,30 @@ public class TaskStructClassGene {
 				"Usage: " + " [className] [-i inputPath ...] [-o outputPath ...] "+"\n");
 		System.exit(-1);
 	}
+	
+	/**
+	 * check the provided classname valid. 
+	 * @param className
+	 * @return
+	 */
+	@SuppressWarnings("finally")
+	public static boolean  checkClassName(String className) {
+		boolean classExist =  true;
+		try {
+			Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			classExist = false;
+		} finally{
+			return classExist;
+		}
+	}
 	public static void main(String[] args)  {
 		
-		if(args.length <= 5) {
+		if(args.length <= 5 ) {
+			printUsage();
+		}
+		if(! checkClassName(args[0]) ) {
 			printUsage();
 		}
 		TaskStructClassGene tscg = new TaskStructClassGene(args[0]);
@@ -60,7 +90,7 @@ public class TaskStructClassGene {
 			if( (inputArgs.size() + outputArgs.size()) == 0) {
 				printUsage();
 			}
-			Method m = cls.getMethod("operation", String[].class, String[].class);
+			Method m = cls.getMethod("operate", String[].class, String[].class);
 			m.invoke(cls.newInstance(), inputArgs.toArray(new String[0]), 
 					outputArgs.toArray(new String[0]));
 		} catch (SecurityException e) {

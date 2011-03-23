@@ -5,11 +5,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 import com.transformer.compiler.TaskStruct;
+import com.transformer.compiler.Operation;
 
-public class TestTaskStruct extends TaskStruct {
+public class TestTaskStruct implements Operation{
 
 	@Override
-	public void operation(String[] inPath, String[] outPath) {
+	public void operate(String[] inPath, String[] outPath) {
 		// TODO Auto-generated method stub
 		assert(inPath.length > 0);
 //		File [] infile = new File[inpath.length];

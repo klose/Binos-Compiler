@@ -35,7 +35,7 @@ public class TestTaskStruct1 {
 		}
 		System.out.println(inputArgs.toString() + ":" + outputArgs.toString());
 		Class invokeClass = Class.forName("com.transformer.test.compiler.TestTaskStruct");
-		Method invokeMethod = invokeClass.getMethod("operation", String[].class, String[].class);
+		Method invokeMethod = invokeClass.getMethod("operate", String[].class, String[].class);
 		invokeMethod.invoke(invokeClass.newInstance(), inputArgs.toArray(new String[0]), outputArgs.toArray(new String[0]));
 		
 	}

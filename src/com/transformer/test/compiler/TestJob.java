@@ -11,6 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import com.transformer.compiler.Channel;
 import com.transformer.compiler.ChannelManager;
 import com.transformer.compiler.CreateXml;
+import com.transformer.compiler.JobCompiler;
 import com.transformer.compiler.JobStruct;
 import com.transformer.compiler.ParallelLevel;
 import com.transformer.compiler.PhaseStruct;
@@ -33,6 +34,12 @@ public class TestJob {
 			TaskStruct ts2 = new TaskStruct();
 			TaskStruct ts3 = new TaskStruct();
 			TaskStruct ts4 = new TaskStruct();
+			
+			ts1.setOperationClass(TestTaskStruct.class);
+			ts2.setOperationClass(TestTaskStruct.class);
+			ts3.setOperationClass(TestTaskStruct.class);
+			ts4.setOperationClass(TestTaskStruct.class);
+			
 			String[] a = {"aaa","bbb","ccc","ddd"};
 			String[] b = {"aaa","bbb","ccc"};
 			String[] c = {"aaa"};
@@ -65,12 +72,7 @@ public class TestJob {
 			chm.addChannels(ch3);
 			
 			Map<String, TaskStruct> map = chm.parseDep();
-			CreateXml cx = new CreateXml(job, map);
-			try {
-				cx.createAll();
-			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			JobCompiler compiler = new JobCompiler(map, job);
+			compiler.compile();
 		}
 }

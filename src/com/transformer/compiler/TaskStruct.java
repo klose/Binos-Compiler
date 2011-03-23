@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public  abstract class TaskStruct {
+
+
+public  class TaskStruct {
 	private String taskId;
 	private String[] inputPath;
 	private String[] outputPath;
@@ -13,15 +15,13 @@ public  abstract class TaskStruct {
 	private  int outputPathNum;
 	private int depNum;
 	private String[] depTaskId;
+	private String className;//set the name of class which implements the interface---Operation. 
 	private ArrayList<String> depTaskIdList = new ArrayList<String>();
 	private Map<String,Integer> depTaskMap = new HashMap<String, Integer>();
-	private String taskXmlPath;
-	private String taskJarPath;
-//	TaskStruct() {
-//		this.taskId = id;
-//		this.inputPath = inputPath;
-//		this.outputPath = outputPath;
-//	}
+	private String taskXmlPath;// this is relative path in the directory of job
+	private String taskJarPath; // this is relative path in the directory of job
+	private Class <? extends Operation> operCls;
+
 	public TaskStruct(){
 		
 	}
@@ -31,7 +31,17 @@ public  abstract class TaskStruct {
 		this.outputPath = ts.getOutputPath();
 		this.inputPathNum = ts.getInputPathNum();
 		this.outputPathNum = ts.getOutputPathNum();
-		
+		this.className = ts.getClassName();
+	}
+	public void setOperationClass(Class<? extends Operation> cls) {
+		this.operCls = cls;
+		this.setClassName(cls.getName());
+	} 
+	public String getClassName() {
+		return this.className;
+	}
+	private void setClassName(String className) {
+		this.className = className;
 	}
 	public String getTaskId() {
 		return taskId;
@@ -39,8 +49,8 @@ public  abstract class TaskStruct {
 	}
 	public void setTaskId(String taskId) {
 		this.taskId = taskId;
-		this.taskXmlPath = System.getProperty("java.io.tmpdir")+"/"+this.taskId+"/"+this.taskId+".xml";
-		this.taskJarPath = System.getProperty("java.io.tmpdir")+"/"+this.taskId+"/"+this.taskId+".jar";
+		this.taskXmlPath = this.taskId + "/" + this.taskId + ".xml";
+		this.taskJarPath = this.taskId + "/" + this.taskId + ".jar";
 	}
 	public String[] getInputPath() {
 		return inputPath;
@@ -55,7 +65,7 @@ public  abstract class TaskStruct {
 	public void setOutputPath(String[] outputPath) {
 		this.outputPath = outputPath;
 	}
-	public abstract void operation(String[] inpath, String[] outpath);
+
 	public void setInputPathNum(int inputPathNum){
 		this.inputPathNum = inputPathNum;
 	}
@@ -97,7 +107,12 @@ public  abstract class TaskStruct {
 	public String getTaskJarPath(){
 		return this.taskJarPath;
 	}
-	
+	public void setTaskXmlAbsPath(String dirPath){
+		this.taskXmlPath = dirPath + this.taskXmlPath;
+	}
+	public void setTaskJarAbsPath(String dirPath){
+		this.taskJarPath = dirPath + this.taskJarPath;
+	}
 	public void addMap(String taskId, int outputIndex){
 		this.depTaskMap.put(taskId, Integer.valueOf(outputIndex));
 	}

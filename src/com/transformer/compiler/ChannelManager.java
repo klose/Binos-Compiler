@@ -27,14 +27,17 @@ public class ChannelManager {
 		public Map<String, TaskStruct> parseDep(){
 			
 			Iterator it = channelList.iterator();
+			
 			/*
 			 * inputMap used for store the output task and its input path numbers.
 			 * */
 			HashMap<TaskStruct,Integer> inputMap = new HashMap<TaskStruct,Integer>();
+			
 			/*
 			 * outputMap used for store the input task and its output path numbers.
 			 * */
 			HashMap<TaskStruct,Integer> outputMap = new HashMap<TaskStruct,Integer>();
+			
 			/*
 			 * the  while used for iterating the channel list and computing final output path number.
 			 * */
