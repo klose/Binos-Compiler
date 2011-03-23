@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public  class TaskStruct {
+public  abstract class TaskStruct {
 	private String taskId;
 	private String[] inputPath;
 	private String[] outputPath;
@@ -55,7 +55,7 @@ public  class TaskStruct {
 	public void setOutputPath(String[] outputPath) {
 		this.outputPath = outputPath;
 	}
-//	public abstract void operation(String[] inpath, String[] outpath);
+	public abstract void operation(String[] inpath, String[] outpath);
 	public void setInputPathNum(int inputPathNum){
 		this.inputPathNum = inputPathNum;
 	}
