@@ -50,7 +50,7 @@ public  class TaskStruct {
 	public void setTaskId(String taskId) {
 		this.taskId = taskId;
 		this.taskXmlPath = this.taskId + "/" + this.taskId + ".xml";
-		this.taskJarPath = this.taskId + "/" + this.taskId + ".jar";
+		this.taskJarPath = "job.jar";
 	}
 	public String[] getInputPath() {
 		return inputPath;
@@ -108,10 +108,10 @@ public  class TaskStruct {
 		return this.taskJarPath;
 	}
 	public void setTaskXmlAbsPath(String dirPath){
-		this.taskXmlPath = dirPath + this.taskXmlPath;
+		this.taskXmlPath = dirPath + "/" + this.taskXmlPath;
 	}
 	public void setTaskJarAbsPath(String dirPath){
-		this.taskJarPath = dirPath + this.taskJarPath;
+		this.taskJarPath = dirPath + "/" + this.taskJarPath;
 	}
 	public void addMap(String taskId, int outputIndex){
 		this.depTaskMap.put(taskId, Integer.valueOf(outputIndex));

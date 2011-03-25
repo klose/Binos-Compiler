@@ -73,8 +73,7 @@ public class CreateJob {
 			try {
 				CreateTaskXml ctx = new CreateTaskXml(taskStruct);
 				ctx.createTaskXml();
-				CreateTaskJar ctj = new CreateTaskJar(taskStruct);
-				ctj.createTaskJar();
+				
 			} catch (ParserConfigurationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

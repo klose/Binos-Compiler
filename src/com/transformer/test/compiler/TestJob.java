@@ -10,7 +10,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import com.transformer.compiler.Channel;
 import com.transformer.compiler.ChannelManager;
-import com.transformer.compiler.CreateXml;
 import com.transformer.compiler.JobCompiler;
 import com.transformer.compiler.JobStruct;
 import com.transformer.compiler.ParallelLevel;
@@ -70,7 +69,6 @@ public class TestJob {
 			chm.addChannels(ch1);
 			chm.addChannels(ch2);
 			chm.addChannels(ch3);
-			
 			Map<String, TaskStruct> map = chm.parseDep();
 			JobCompiler compiler = new JobCompiler(map, job);
 			compiler.compile();

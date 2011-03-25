@@ -1,7 +1,7 @@
 package com.transformer.compiler;
 
 public class Channel {
-	private TransmitType trtype = TransmitType.localfile;
+	private TransmitType trtype = TransmitType.localFile;
 	private TaskStruct from;
 	private TaskStruct to;
 	private int outputIndex;

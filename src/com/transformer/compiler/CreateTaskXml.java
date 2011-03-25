@@ -57,6 +57,11 @@ public class CreateTaskXml {
 			Element taskJarPath = document.createElement("jarPath");
 			taskJarPath.appendChild(document.createTextNode(taskStruct.getTaskJarPath()));
 			root.appendChild(taskJarPath);
+			
+			Element taskOperationClass = document.createElement("operationClass");
+			taskOperationClass.appendChild(document.createTextNode(taskStruct.getClassName()));
+			root.appendChild(taskOperationClass);
+			
 			Element inputPath = document.createElement("inputPath");
 			inputPath.setAttribute("inputPathNum", String.valueOf(taskStruct.getInputPath().length));
 			int i = 0;
