@@ -44,11 +44,9 @@ public class CreateJob {
 	public CreateJob(JobStruct job, Map<String, TaskStruct> map) throws ParserConfigurationException{
 		this.map = map;
 		this.job = job;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-		Date date  = new Date();
-		String str = sdf.format(date);
-		jobDirPath = System.getProperty("java.io.tmpdir") + "/" + str;
-		this.filename = this.jobDirPath + "/" + str + ".xml";
+		
+		jobDirPath = JobConfiguration.getWorkingDirectory() + "/" + JobConfiguration.getCreateTime();
+		this.filename = this.jobDirPath + "/" + "job-" + JobConfiguration.getCreateTime() + ".xml";
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		document = builder.newDocument();
