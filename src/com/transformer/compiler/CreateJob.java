@@ -63,6 +63,9 @@ public class CreateJob {
 		document.appendChild(root);
 		Collection<TaskStruct> collection = map.values();
 		Iterator it = collection.iterator();
+		Element totalTask = document.createElement("total");
+		totalTask.appendChild(document.createTextNode(String.valueOf(collection.size())));
+		root.appendChild(totalTask);
 		while(it.hasNext()){
 			TaskStruct taskStruct = (TaskStruct)it.next();
 			taskStruct.setTaskXmlRelativePath("job-" + JobConfiguration.getCreateTime());
@@ -77,6 +80,7 @@ public class CreateJob {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			
 			Element task = document.createElement("task");
 			task.setAttribute("id",taskStruct.getTaskId() );
