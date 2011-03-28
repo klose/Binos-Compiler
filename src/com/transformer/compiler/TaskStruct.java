@@ -107,11 +107,22 @@ public  class TaskStruct {
 	public String getTaskJarPath(){
 		return this.taskJarPath;
 	}
-	public void setTaskXmlAbsPath(String dirPath){
+	/**
+	 * Set the relative path of the task.xml.
+	 * This can be mapped into HDFS.
+	 * @param dirPath: this is the base path of the job.
+	 */
+	public void setTaskXmlRelativePath(String dirPath){
 		this.taskXmlPath = dirPath + "/" + this.taskXmlPath;
 	}
-	public void setTaskJarAbsPath(String dirPath){
-		this.taskJarPath = dirPath + "/" + this.taskJarPath;
+	
+	/**
+	 * Set the relative path of the task jar 
+	 * This can be mapped into HDFS.
+	 * @param dirPath: this is the base path of the job.
+	 */
+	public void setTaskJarRelativePath(String dirPath){
+		this.taskJarPath = dirPath+ "/" + "job.jar";
 	}
 	public void addMap(String taskId, int outputIndex){
 		this.depTaskMap.put(taskId, Integer.valueOf(outputIndex));

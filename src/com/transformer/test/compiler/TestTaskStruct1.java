@@ -31,7 +31,7 @@ public class TestTaskStruct1 {
 					outputArgs.add(args[i]);
 				}
 			}
-			i ++;
+			i++;
 		}
 		System.out.println(inputArgs.toString() + ":" + outputArgs.toString());
 		Class invokeClass = Class.forName("com.transformer.test.compiler.TestTaskStruct");

@@ -3,12 +3,14 @@ package com.transformer.compiler;
 public class JobConfiguration {
 	private static String workingDirectory = System.getProperty("java.io.tmpdir");
 	private static String createTime = "job";
-	public static String getWorkingDirectory() {
-		return workingDirectory;
-	}
+	
 	public static void setWorkingDirectory(String workingDirectory) {
 		JobConfiguration.workingDirectory = workingDirectory;
 	}
+	public static String getWorkingDirectory() {
+		return workingDirectory;
+	}
+	
 	public static String getCreateTime() {
 		return createTime;
 	}
