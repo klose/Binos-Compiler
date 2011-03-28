@@ -67,6 +67,7 @@ public class CreateJob {
 			TaskStruct taskStruct = (TaskStruct)it.next();
 			taskStruct.setTaskXmlRelativePath("job-" + JobConfiguration.getCreateTime());
 			taskStruct.setTaskJarRelativePath("job-" + JobConfiguration.getCreateTime());
+			taskStruct.setLocalXMLPath(jobDirLocalPath);
 			// used for creating xml file for every task.
 			try {
 				CreateTaskXml ctx = new CreateTaskXml(taskStruct);

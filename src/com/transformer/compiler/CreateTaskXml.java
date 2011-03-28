@@ -37,7 +37,7 @@ public class CreateTaskXml {
 		 * */
 		public CreateTaskXml(TaskStruct ts) throws ParserConfigurationException{
 			this.taskStruct = ts;
-			this.filename = this.taskStruct.getTaskXmlPath();
+			this.filename = this.taskStruct.getLocalXMLPath();
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			document = builder.newDocument();
@@ -125,7 +125,7 @@ public class CreateTaskXml {
 		 * @description the interface for other models 
 		 * */
 		public void createTaskXml(){
-			checkFileExist(this.taskStruct.getTaskXmlPath());
+			checkFileExist(this.taskStruct.getLocalXMLPath());
 			toWrite();
 			toSave();			
 		}
