@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="GB2312" standalone="no"?>
+<task>
+<taskId>0_1_0</taskId>
+<jarPath>job-20110402142142752/job.jar</jarPath>
+<operationClass>com.transformer.test.compiler.TestTaskStruct</operationClass>
+<inputPath inputPathNum="1">
+<path id="1">aaa</path>
+</inputPath>
+<outputPath outputPathNum="1">
+<path id="1">/tmp/0_1_0/outputPath/outputPath0</path>
+</outputPath>
+</task>
