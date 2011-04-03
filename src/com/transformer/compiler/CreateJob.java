@@ -36,7 +36,7 @@ public class CreateJob {
 	private JobStruct job;
 	private Map<String, TaskStruct> map;
 	private String date;
-	private String jobDirPath;
+	private String jobDirLocalPath;
 	/*
 	 * @param  JobStruct the job which will be created xml information.
 	 * @param  map the task lists corresponding to the job
@@ -45,8 +45,8 @@ public class CreateJob {
 		this.map = map;
 		this.job = job;
 		
-		jobDirPath = JobConfiguration.getWorkingDirectory() + "/" + JobConfiguration.getCreateTime();
-		this.filename = this.jobDirPath + "/" + "job-" + JobConfiguration.getCreateTime() + ".xml";
+		jobDirLocalPath = JobConfiguration.getWorkingDirectory() + "/" + JobConfiguration.getCreateTime();
+		this.filename = this.jobDirLocalPath + "/" + "job-" + JobConfiguration.getCreateTime() + ".xml";
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		document = builder.newDocument();
@@ -63,10 +63,14 @@ public class CreateJob {
 		document.appendChild(root);
 		Collection<TaskStruct> collection = map.values();
 		Iterator it = collection.iterator();
+		Element totalTask = document.createElement("total");
+		totalTask.appendChild(document.createTextNode(String.valueOf(collection.size())));
+		root.appendChild(totalTask);
 		while(it.hasNext()){
 			TaskStruct taskStruct = (TaskStruct)it.next();
-			taskStruct.setTaskXmlAbsPath(jobDirPath);
-			taskStruct.setTaskJarAbsPath(jobDirPath);
+			taskStruct.setTaskXmlRelativePath("job-" + JobConfiguration.getCreateTime());
+			taskStruct.setTaskJarRelativePath("job-" + JobConfiguration.getCreateTime());
+			taskStruct.setLocalXMLPath(jobDirLocalPath);
 			// used for creating xml file for every task.
 			try {
 				CreateTaskXml ctx = new CreateTaskXml(taskStruct);
@@ -76,6 +80,7 @@ public class CreateJob {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			
 			Element task = document.createElement("task");
 			task.setAttribute("id",taskStruct.getTaskId() );

@@ -1,11 +1,7 @@
-package com.transformer.compiler;
+package com.transformer.test.compiler;
 
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 /**
  * TaskStructClassGene is used for generating the runnable jar. 
@@ -55,23 +51,19 @@ public class TaskStructClassGene {
 			return classExist;
 		}
 	}
-	public static void main(String[] args) throws MalformedURLException, ClassNotFoundException  {
+	public static void main(String[] args)  {
 		
 		if(args.length < 5 ) {
 			System.out.println("args lack!");
 			printUsage();
 		}
-		TaskStructClassGene tscg = new TaskStructClassGene(args[0]);
-		
-	
 		if(! checkClassName(args[0]) ) {
 			System.out.println(args[0]);
 			printUsage();
 		}
-		
-		try{
-			ClassLoader classLoader = TaskStructClassGene.class.getClassLoader();
-			Class cls= classLoader.loadClass(tscg.getClassName());
+		TaskStructClassGene tscg = new TaskStructClassGene(args[0]);
+		try {
+			Class cls = Class.forName(tscg.getClassName());
 			ArrayList<String> inputArgs = new ArrayList<String> ();
 			ArrayList<String> outputArgs = new ArrayList<String> ();
 			boolean isInputArgs = false;
@@ -101,8 +93,7 @@ public class TaskStructClassGene {
 			if( (inputArgs.size() + outputArgs.size()) == 0) {
 				printUsage();
 			}
-			
-			    Method m = cls.getMethod("operate", String[].class, String[].class);
+			Method m = cls.getMethod("operate", String[].class, String[].class);
 			m.invoke(cls.newInstance(), inputArgs.toArray(new String[0]), 
 					outputArgs.toArray(new String[0]));
 		} catch (SecurityException e) {

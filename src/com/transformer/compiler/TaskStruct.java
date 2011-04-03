@@ -21,7 +21,8 @@ public  class TaskStruct {
 	private String taskXmlPath;// this is relative path in the directory of job
 	private String taskJarPath; // this is relative path in the directory of job
 	private Class <? extends Operation> operCls;
-
+	private String localXMLPath; //this is local path of the taskId.xml
+	
 	public TaskStruct(){
 		
 	}
@@ -43,6 +44,13 @@ public  class TaskStruct {
 	private void setClassName(String className) {
 		this.className = className;
 	}
+	
+	public String getLocalXMLPath() {
+		return localXMLPath;
+	}
+	public void setLocalXMLPath(String localXMLPath) {
+		this.localXMLPath = localXMLPath + "/" + this.taskId + "/" + this.taskId + ".xml";;
+	}
 	public String getTaskId() {
 		return taskId;
 		
@@ -51,6 +59,7 @@ public  class TaskStruct {
 		this.taskId = taskId;
 		this.taskXmlPath = this.taskId + "/" + this.taskId + ".xml";
 		this.taskJarPath = "job.jar";
+		
 	}
 	public String[] getInputPath() {
 		return inputPath;
@@ -107,11 +116,22 @@ public  class TaskStruct {
 	public String getTaskJarPath(){
 		return this.taskJarPath;
 	}
-	public void setTaskXmlAbsPath(String dirPath){
+	/**
+	 * Set the relative path of the task.xml.
+	 * This can be mapped into HDFS.
+	 * @param dirPath: this is the base path of the job.
+	 */
+	public void setTaskXmlRelativePath(String dirPath){
 		this.taskXmlPath = dirPath + "/" + this.taskXmlPath;
 	}
-	public void setTaskJarAbsPath(String dirPath){
-		this.taskJarPath = dirPath + "/" + this.taskJarPath;
+	
+	/**
+	 * Set the relative path of the task jar 
+	 * This can be mapped into HDFS.
+	 * @param dirPath: this is the base path of the job.
+	 */
+	public void setTaskJarRelativePath(String dirPath){
+		this.taskJarPath = dirPath+ "/" + "job.jar";
 	}
 	public void addMap(String taskId, int outputIndex){
 		this.depTaskMap.put(taskId, Integer.valueOf(outputIndex));
