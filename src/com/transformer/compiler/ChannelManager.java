@@ -92,6 +92,17 @@ public class ChannelManager {
 					String[] tmppath = new String[inputPathNum];
 					tmppath = InterNodePath.partitionInputPath(ints.getTaskId(),inputPathNum);
 					ints.setInputPath(tmppath);
+					if(ints.getDepTaskMap() != null){
+						String[] s = new String[ints.getDepTaskMap().size()];
+						Iterator its = ints.getDepTaskMap().entrySet().iterator();
+						int i = 0;
+						while(its.hasNext()){
+							s[i] = "hdfs://10.10.102.21:26666/user/jiangbing/"+ints.getDepId()[i]+"outputpath"+(ints.getDepTaskMap().get(ints.getDepId()[i])).intValue();
+							i++;
+							its.next();
+						}
+						ints.setInputPath(s);
+					}
 					finalList.put(ints.getTaskId(), ints);
 					
 				}
@@ -111,6 +122,17 @@ public class ChannelManager {
 						String[] tmppath = new String[outputPathNum];
 						tmppath = InterNodePath.partitionOutputPath(ts.getTaskId(),outputPathNum);
 						ts.setOutputPath(tmppath);
+						if(ts.getDepTaskMap() != null){
+							String[] s = new String[ts.getDepTaskMap().size()];
+							Iterator its = ts.getDepTaskMap().entrySet().iterator();
+							int i = 0;
+							while(its.hasNext()){
+								s[i] = "hdfs://10.10.102.21:26666/user/jiangbing/"+ts.getDepId()[i]+"outputpath"+(ts.getDepTaskMap().get(ts.getDepId()[i])).intValue();
+								i++;
+								its.next();
+							}
+							ts.setInputPath(s);
+						}
 						finalList.put(outs.getTaskId(), ts);
 					}
 					else{
@@ -122,8 +144,7 @@ public class ChannelManager {
 					}
 				}
 			}
-			
-			
+						
 		return finalList;
 		}
 }

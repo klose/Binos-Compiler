@@ -39,7 +39,7 @@ public class TestJob {
 			ts3.setOperationClass(TestTaskStruct.class);
 			ts4.setOperationClass(TestTaskStruct.class);
 			
-			String[] a = {"aaa","bbb","ccc","ddd"};
+			String[] a = {"hdfs://10.10.102.21:26666/user/jiangbing/input","bbb","ccc","ddd"};
 			String[] b = {"aaa","bbb","ccc"};
 			String[] c = {"aaa"};
 			ps1.addTask(ts1, 4, a);

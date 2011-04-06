@@ -58,8 +58,7 @@ public  class TaskStruct {
 	public void setTaskId(String taskId) {
 		this.taskId = taskId;
 		this.taskXmlPath = this.taskId + "/" + this.taskId + ".xml";
-		this.taskJarPath = "job.jar";
-		
+		this.taskJarPath = "job.jar";		
 	}
 	public String[] getInputPath() {
 		return inputPath;
@@ -139,5 +138,9 @@ public  class TaskStruct {
 	
 	public void addDepTaskId(String id){
 		this.depTaskIdList.add(id);
+	}
+	
+	public Map<String,Integer> getDepTaskMap(){
+		return this.depTaskMap;
 	}
 }
