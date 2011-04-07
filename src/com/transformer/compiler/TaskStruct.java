@@ -133,14 +133,24 @@ public  class TaskStruct {
 		this.taskJarPath = dirPath+ "/" + "job.jar";
 	}
 	public void addMap(String taskId, int outputIndex){
+		if(this.depTaskMap.containsKey(taskId)){
+			taskId = taskId + " ";
+		}
 		this.depTaskMap.put(taskId, Integer.valueOf(outputIndex));
 	}
 	
 	public void addDepTaskId(String id){
-		this.depTaskIdList.add(id);
+		if(!this.depTaskIdList.contains(id)){
+			this.depTaskIdList.add(id);
+		}
+		
 	}
 	
 	public Map<String,Integer> getDepTaskMap(){
 		return this.depTaskMap;
 	}
+	public ArrayList<String> getDepTaskIdList(){
+		return this.depTaskIdList;
+	}
+	
 }

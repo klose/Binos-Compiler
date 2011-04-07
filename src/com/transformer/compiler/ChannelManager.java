@@ -9,6 +9,7 @@ import java.util.Set;
 
 public class ChannelManager {
 		private ArrayList<Channel> channelList = new ArrayList<Channel>();
+		private String  pathPrefix = "hdfs://10.5.0.55:26666/user/jiangbing";
 		public ChannelManager(){}
 		
 		/*add channel*/
@@ -43,6 +44,9 @@ public class ChannelManager {
 			 * */
 			while(it.hasNext()){
 				Channel channel = (Channel)it.next();
+//				System.out.println("taskStruct From" + channel.getFrom().getTaskId() + " to " + channel.getTo().getTaskId());
+//				System.out.println(channel.toString());
+				
 				TaskStruct tsFrom = channel.getFrom();
 				if(outputMap.containsKey(tsFrom)){
 					int i = outputMap.get(tsFrom).intValue();
@@ -87,19 +91,24 @@ public class ChannelManager {
 				
 				if(inputMap.containsKey(ints)){
 					int inputPathNum = inputMap.get(ints).intValue();
+					System.out.println(String.valueOf(inputPathNum));
 					ints.setInputPathNum(inputPathNum);
-					ints.setDepNum(inputPathNum);
+					ints.setDepNum(ints.getDepTaskIdList().size());
 					String[] tmppath = new String[inputPathNum];
 					tmppath = InterNodePath.partitionInputPath(ints.getTaskId(),inputPathNum);
+					
 					ints.setInputPath(tmppath);
+					pathPrefix = JobConfiguration.getPathHDFSPrefix();
 					if(ints.getDepTaskMap() != null){
 						String[] s = new String[ints.getDepTaskMap().size()];
-						Iterator its = ints.getDepTaskMap().entrySet().iterator();
+						System.out.println("" + s.length);
+						Set<String> set = ints.getDepTaskMap().keySet();
+						Iterator ite = set.iterator();
 						int i = 0;
-						while(its.hasNext()){
-							s[i] = "hdfs://10.10.102.21:26666/user/jiangbing/"+ints.getDepId()[i]+"outputpath"+(ints.getDepTaskMap().get(ints.getDepId()[i])).intValue();
+						while(ite.hasNext()){
+							String key = (String)ite.next();
+							s[i] = pathPrefix + "/" + key.trim() +"outputPath"+(ints.getDepTaskMap().get(key)).intValue();
 							i++;
-							its.next();
 						}
 						ints.setInputPath(s);
 					}
@@ -122,17 +131,20 @@ public class ChannelManager {
 						String[] tmppath = new String[outputPathNum];
 						tmppath = InterNodePath.partitionOutputPath(ts.getTaskId(),outputPathNum);
 						ts.setOutputPath(tmppath);
-						if(ts.getDepTaskMap() != null){
-							String[] s = new String[ts.getDepTaskMap().size()];
-							Iterator its = ts.getDepTaskMap().entrySet().iterator();
-							int i = 0;
-							while(its.hasNext()){
-								s[i] = "hdfs://10.10.102.21:26666/user/jiangbing/"+ts.getDepId()[i]+"outputpath"+(ts.getDepTaskMap().get(ts.getDepId()[i])).intValue();
-								i++;
-								its.next();
-							}
-							ts.setInputPath(s);
-						}
+						pathPrefix = JobConfiguration.getPathHDFSPrefix();
+//						if(ts.getDepTaskMap() != null){
+//							String[] s = new String[ts.getDepTaskMap().size()];
+//							System.out.println("" + s.length);
+//							Set<String> set = ts.getDepTaskMap().keySet();
+//							Iterator ite = set.iterator();
+//							int i = 0;
+//							while(ite.hasNext()){
+//								String key = (String)ite.next();
+//								s[i] = pathPrefix + "/" + key.trim() +"outputPath"+(ts.getDepTaskMap().get(key)).intValue();
+//								i++;
+//							}
+//							ts.setInputPath(s);
+//						}
 						finalList.put(outs.getTaskId(), ts);
 					}
 					else{

@@ -3,7 +3,14 @@ package com.transformer.compiler;
 public class JobConfiguration {
 	private static String workingDirectory = System.getProperty("java.io.tmpdir");
 	private static String createTime = "job";
+	private static String pathHDFSPrefix = "hdfs://";
 	
+	public static String getPathHDFSPrefix() {
+		return pathHDFSPrefix;
+	}
+	public static void setPathHDFSPrefix(String pathHDFSPrefix) {
+		JobConfiguration.pathHDFSPrefix = pathHDFSPrefix;
+	}
 	public static void setWorkingDirectory(String workingDirectory) {
 		JobConfiguration.workingDirectory = workingDirectory;
 	}
