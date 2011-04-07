@@ -45,8 +45,7 @@ public class TestJob {
 			ps1.addTask(ts1, 4, a);
 			ps2.addTask(ts2, 3,b);
 			ps3.addTask(ts3, 2);
-			ps4.addTask(ts4, 1,c);
-			
+			ps4.addTask(ts4, 1,c);	
 			
 			Channel[] ch1 = new Channel[ps1.getParallelNum()];
 			Channel[] ch2 = new Channel[ps2.getParallelNum()];
