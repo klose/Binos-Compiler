@@ -25,4 +25,5 @@ public class JobConfiguration {
 		JobConfiguration.createTime = createTime;
 	}
 	
+	
 }
