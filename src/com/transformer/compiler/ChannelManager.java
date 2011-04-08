@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class ChannelManager {
 		private ArrayList<Channel> channelList = new ArrayList<Channel>();
-		private String  pathPrefix = "hdfs://10.5.0.55:26666/user/jiangbing";
+		private String  pathPrefix = JobConfiguration.getPathHDFSPrefix();
 		public ChannelManager(){}
 		
 		/*add channel*/
