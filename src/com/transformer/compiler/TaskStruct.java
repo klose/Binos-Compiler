@@ -133,8 +133,11 @@ public  class TaskStruct {
 		this.taskJarPath = dirPath+ "/" + "job.jar";
 	}
 	public void addMap(String taskId, int outputIndex){
-		if(this.depTaskMap.containsKey(taskId)){
-			taskId = taskId + " ";
+		for(int k=0;k<100;k++){
+			if(this.depTaskMap.containsKey(taskId)){
+				taskId = taskId + " ";
+			}
+			else break;
 		}
 		this.depTaskMap.put(taskId, Integer.valueOf(outputIndex));
 	}

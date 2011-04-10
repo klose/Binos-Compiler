@@ -58,8 +58,7 @@ public class ChannelManager {
 					/*stored tsFrom's output path number*/
 					outputMap.put(tsFrom, Integer.valueOf(1));
 				}
-			
-				
+							
 				TaskStruct tsTo = channel.getTo();
 				
 				tsTo.addMap(tsFrom.getTaskId(), channel.getOutputIndex());
