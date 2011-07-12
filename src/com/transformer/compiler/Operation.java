@@ -7,4 +7,5 @@ package com.transformer.compiler;
  */
 public interface Operation {
 	public void operate(String[] inputPath, String[] outputPath);
+	
 }

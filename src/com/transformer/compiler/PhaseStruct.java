@@ -25,8 +25,8 @@ public class PhaseStruct {
 	public void addTask(TaskStruct ts, int parallelNum, String[] path) {
 		this.parallelNum = parallelNum;
 		this.ts = new TaskStruct[parallelNum];
-		if(path.length%parallelNum != 0){
-			System.out.println("the wrong input path or output path number.");
+		if(path.length % parallelNum != 0){
+			System.out.println("the number of input path or output path conflicts with parallel number.");
 			System.exit(2);
 		}
 		int k = path.length/parallelNum;

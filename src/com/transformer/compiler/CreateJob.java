@@ -35,16 +35,17 @@ public class CreateJob {
 	private String filename;
 	private JobStruct job;
 	private Map<String, TaskStruct> map;
+	private Map<String, String> properties;
 	private String date;
 	private String jobDirLocalPath;
 	/*
 	 * @param  JobStruct the job which will be created xml information.
 	 * @param  map the task lists corresponding to the job
 	 * */
-	public CreateJob(JobStruct job, Map<String, TaskStruct> map) throws ParserConfigurationException{
+	public CreateJob(JobStruct job, Map<String, TaskStruct> map, Map<String, String> properties) throws ParserConfigurationException{
 		this.map = map;
 		this.job = job;
-		
+		this.properties = properties;
 		jobDirLocalPath = JobConfiguration.getWorkingDirectory() + "/" + JobConfiguration.getCreateTime();
 		this.filename = this.jobDirLocalPath + "/" + "job-" + JobConfiguration.getCreateTime() + ".xml";
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -94,8 +95,15 @@ public class CreateJob {
 				task.appendChild(depTask);							
 			}
 			root.appendChild(task);
-		}					
-	
+		}
+		if (properties != null) {
+			for (String tmp : properties.keySet()) {
+				Element propertyEle = document.createElement("properties");
+				propertyEle.setAttribute("key", tmp);
+				propertyEle.setAttribute("value", properties.get(tmp));
+				root.appendChild(propertyEle);
+			}
+		}
 	}
 	
 	/**

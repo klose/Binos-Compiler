@@ -4,7 +4,6 @@ public class JobConfiguration {
 	private static String workingDirectory = System.getProperty("java.io.tmpdir");
 	private static String createTime = "job";
 	private static String pathHDFSPrefix = "hdfs://";
-	
 	public static String getPathHDFSPrefix() {
 		return pathHDFSPrefix;
 	}
