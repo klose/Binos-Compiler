@@ -6,6 +6,5 @@ package com.transformer.compiler;
  *
  */
 public interface Operation {
-	public void operate(String[] inputPath, String[] outputPath);
-	
+	public void operate(JobProperties properties, String[] inputPath, String[] outputPath);
 }

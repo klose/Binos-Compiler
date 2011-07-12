@@ -98,7 +98,7 @@ public class CreateJob {
 		}
 		if (properties != null) {
 			for (String tmp : properties.keySet()) {
-				Element propertyEle = document.createElement("properties");
+				Element propertyEle = document.createElement("property");
 				propertyEle.setAttribute("key", tmp);
 				propertyEle.setAttribute("value", properties.get(tmp));
 				root.appendChild(propertyEle);
