@@ -23,6 +23,10 @@ public class JobConfiguration {
 	public static void setCreateTime(String createTime) {
 		JobConfiguration.createTime = createTime;
 	}
+	public static String getMsgHeader() {
+		// TODO Auto-generated method stub
+		return "MSG:";
+	}
 	
 	
 }

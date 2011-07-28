@@ -15,6 +15,8 @@ import com.transformer.compiler.JobStruct;
 import com.transformer.compiler.ParallelLevel;
 import com.transformer.compiler.PhaseStruct;
 import com.transformer.compiler.TaskStruct;
+import com.transformer.compiler.TransmitType;
+import com.transformer.compiler.Tunnel;
 
 public class TestJob {
 		public static void main(String[] args){
@@ -63,11 +65,14 @@ public class TestJob {
 			{	
 				ch3[i] = new Channel(ps3.getTaskStruct()[i],1,ps4.getTaskStruct()[0],i);
 			}
-			
+			Tunnel t1 = new Tunnel(ps1, ps2, ch1, TransmitType.HTTP);
+			Tunnel t2 = new Tunnel(ps2, ps3, ch2, TransmitType.HTTP);
+			Tunnel t3 = new Tunnel(ps3, ps4, ch3, TransmitType.HTTP);
 			ChannelManager chm = new ChannelManager();
-			chm.addChannels(ch1);
-			chm.addChannels(ch2);
-			chm.addChannels(ch3);
+			chm.addTunnel(t1);
+			chm.addTunnel(t2);
+			chm.addTunnel(t3);
+			
 			Map<String, TaskStruct> map = chm.parseDep();
 			JobCompiler compiler = new JobCompiler(map, job);
 			compiler.compile();

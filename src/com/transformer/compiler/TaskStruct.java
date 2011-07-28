@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Vector;
 
 
 
@@ -11,6 +12,8 @@ public  class TaskStruct {
 	private String taskId;
 	private String[] inputPath;
 	private String[] outputPath;
+	private Vector<Channel> inputChannel = new Vector<Channel>();
+	private Vector<Channel> outputChannel = new Vector<Channel>();
 	private  int inputPathNum;
 	private  int outputPathNum;
 	private int depNum;
@@ -22,6 +25,12 @@ public  class TaskStruct {
 	private String taskJarPath; // this is relative path in the directory of job
 	private Class <? extends Operation> operCls;
 	private String localXMLPath; //this is local path of the taskId.xml
+	
+	/*specify whether the input is configured by job, when the value is true,job specify the input file.*/  
+	private boolean configInput = false; 
+	
+	//specify whether the output is configured by job.
+	private boolean configOutput = false; 
 	
 	public TaskStruct(){
 		
@@ -148,12 +157,36 @@ public  class TaskStruct {
 		}
 		
 	}
+	public void addInputChannel(Channel channel) {
+		this.inputChannel.add(channel);
+	}
+	public void addOutputChannel(Channel channel) {
+		this.outputChannel.add(channel);
+	}
 	
+	public Vector<Channel> getInputChannel() {
+		return inputChannel;
+	}
+	public Vector<Channel> getOutputChannel() {
+		return outputChannel;
+	}
 	public Map<String,Integer> getDepTaskMap(){
 		return this.depTaskMap;
 	}
 	public ArrayList<String> getDepTaskIdList(){
 		return this.depTaskIdList;
+	}
+	public boolean isConfigInput() {
+		return configInput;
+	}
+	public void setConfigInput(boolean configInput) {
+		this.configInput = configInput;
+	}
+	public boolean isConfigOutput() {
+		return configOutput;
+	}
+	public void setConfigOutput(boolean configOutput) {
+		this.configOutput = configOutput;
 	}
 	
 }

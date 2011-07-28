@@ -39,10 +39,12 @@ public class PhaseStruct {
 			if(this.plevel.getLevel() == 0){
 				this.ts[i].setInputPathNum(k);
 				this.ts[i].setInputPath(tmppath);
+				this.ts[i].setConfigInput(true);
 			}
 			else if(this.plevel.getLevel() == -1){
 				this.ts[i].setOutputPathNum(k);
 				this.ts[i].setOutputPath(tmppath);
+				this.ts[i].setConfigOutput(true);
 			}
 		}		
 		

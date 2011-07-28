@@ -1,7 +1,7 @@
 package com.transformer.compiler;
 
 public class Channel {
-	private TransmitType trtype = TransmitType.localFile;
+	private TransmitType transType;	
 	private TaskStruct from;
 	private TaskStruct to;
 	private int outputIndex;
@@ -11,13 +11,7 @@ public class Channel {
 		this.to  = to;
 		this.inputIndex = inputIndex;
 		this.outputIndex = outputIndex;
-	}
-	public Channel(TaskStruct from, int outputIndex, TaskStruct to, int inputIndex, TransmitType trtype){
-		this.from = from;
-		this.to  = to;
-		this.inputIndex = inputIndex;
-		this.outputIndex = outputIndex;
-		this.trtype = trtype;
+		transType = TransmitType.HDFS;// set the default value
 	}
 	public TaskStruct getFrom(){
 		return this.from;
@@ -30,5 +24,11 @@ public class Channel {
 	}
 	public int getInputIndex(){
 		return this.inputIndex;
+	}
+	public TransmitType getTransType() {
+		return transType;
+	}
+	public void setTransType(TransmitType transType) {
+		this.transType = transType;
 	}
 }

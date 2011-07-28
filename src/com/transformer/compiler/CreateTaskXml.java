@@ -67,7 +67,15 @@ public class CreateTaskXml {
 			int i = 0;
 			for(i = 0;i < taskStruct.getInputPath().length;i++){
 				Element path = document.createElement("path");
-				path.setAttribute("id", String.valueOf(i+1));
+				path.setAttribute("id", String.valueOf(i));
+				if (taskStruct.isConfigInput()) {
+					path.setAttribute("type", "CONFIG");
+					path.setAttribute("valid", "true");
+				}
+				else {
+					path.setAttribute("type", taskStruct.getInputChannel().get(i).getTransType().toString());
+					path.setAttribute("valid", "false");
+				}
 				path.appendChild(document.createTextNode(taskStruct.getInputPath()[i]));
 				inputPath.appendChild(path);
 			}
@@ -76,7 +84,15 @@ public class CreateTaskXml {
 			outputPath.setAttribute("outputPathNum", String.valueOf(taskStruct.getOutputPath().length));
 			for(i=0;i<taskStruct.getOutputPath().length;i++){
 				Element path = document.createElement("path");
-				path.setAttribute("id", String.valueOf(i+1));
+				path.setAttribute("id", String.valueOf(i));
+				if (taskStruct.isConfigOutput()) {
+					path.setAttribute("type", "CONFIG");
+					path.setAttribute("valid", "true");
+				}
+				else {
+					path.setAttribute("type", taskStruct.getOutputChannel().get(i).getTransType().toString());
+					path.setAttribute("valid", "true");
+				}
 				path.appendChild(document.createTextNode(taskStruct.getOutputPath()[i]));
 				outputPath.appendChild(path);
 			}
