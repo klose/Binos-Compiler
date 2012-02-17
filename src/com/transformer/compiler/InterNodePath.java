@@ -25,7 +25,7 @@ public class InterNodePath {
 				tmppath[i] = formerTask.getTaskId() + "::outputPath::" + formerTask.getOutputChannel().indexOf(channel);
 				break;
 			//if transmit type is MSG, which means using Msg from one Task to this one, and it is dependent upon former task. 
-			case MSG:
+			case MESSAGE:
 				pathPrefix = JobConfiguration.getMsgHeader();
 				formerTask = channel.getFrom();
 				tmppath[i] = pathPrefix + formerTask.getTaskId() + "::outputPath::" + formerTask.getOutputChannel().indexOf(channel);
@@ -48,9 +48,9 @@ public class InterNodePath {
 				pathPrefix = JobConfiguration.getPathHDFSPrefix();
 				break;
 			case HTTP:
-				pathPrefix = JobConfiguration.getWorkingDirectory();
+				pathPrefix = JobConfiguration.getWorkingDirectory() + "/job-" + JobConfiguration.getCreateTime();
 				break;
-			case MSG:
+			case MESSAGE:
 				pathPrefix = JobConfiguration.getMsgHeader();
 				break;
 			}

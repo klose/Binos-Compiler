@@ -65,14 +65,13 @@ public class TestJob {
 			{	
 				ch3[i] = new Channel(ps3.getTaskStruct()[i],1,ps4.getTaskStruct()[0],i);
 			}
-			Tunnel t1 = new Tunnel(ps1, ps2, ch1, TransmitType.HTTP);
+			Tunnel t1 = new Tunnel(ps1, ps2, ch1, TransmitType.HDFS);
 			Tunnel t2 = new Tunnel(ps2, ps3, ch2, TransmitType.HTTP);
 			Tunnel t3 = new Tunnel(ps3, ps4, ch3, TransmitType.HTTP);
 			ChannelManager chm = new ChannelManager();
 			chm.addTunnel(t1);
 			chm.addTunnel(t2);
-			chm.addTunnel(t3);
-			
+			chm.addTunnel(t3);			
 			Map<String, TaskStruct> map = chm.parseDep();
 			JobCompiler compiler = new JobCompiler(map, job);
 			compiler.compile();
