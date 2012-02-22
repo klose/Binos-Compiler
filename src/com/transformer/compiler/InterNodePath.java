@@ -44,17 +44,20 @@ public class InterNodePath {
 		for (int i = 0; i < outputNum; i++) {
 			/*as to output path, each method is valid.*/
 			switch (outputChannels.get(i).getTransType()) {
-			case HDFS:
-				pathPrefix = JobConfiguration.getPathHDFSPrefix();
-				break;
-			case HTTP:
-				pathPrefix = JobConfiguration.getWorkingDirectory() + "/job-" + JobConfiguration.getCreateTime();
-				break;
-			case MESSAGE:
-				pathPrefix = JobConfiguration.getMsgHeader();
-				break;
+				case HDFS:
+					pathPrefix = JobConfiguration.getPathHDFSPrefix();
+					tmppath[i] = pathPrefix + "/" + ts.getTaskId() + "outputPath" + i;
+					break;
+				case HTTP:
+					pathPrefix = JobConfiguration.getWorkingDirectory() + "/job-" + JobConfiguration.getCreateTime();
+					tmppath[i] = pathPrefix + "/" + ts.getTaskId() + "outputPath" + i;
+					break;
+				case MESSAGE:
+					pathPrefix = JobConfiguration.getMsgHeader() + JobConfiguration.getCreateTime() + "-";
+					tmppath[i] = pathPrefix + ts.getTaskId() + "outputPath" + i;
+					break;
 			}
-			tmppath[i] = pathPrefix + "/" + ts.getTaskId() + "outputPath" + i;
+			
 		}
 		return tmppath;
 	}
