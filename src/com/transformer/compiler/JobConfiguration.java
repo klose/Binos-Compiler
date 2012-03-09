@@ -27,6 +27,8 @@ public class JobConfiguration {
 		// TODO Auto-generated method stub
 		return "MSG://";
 	}
-	
+	public static String getDistMemHeader() {
+		return "DISTMEM://";
+	}
 	
 }

@@ -14,8 +14,7 @@ public class InterNodePath {
 			switch (channel.getTransType()) {
 			//if transmit type is HDFS, it is a definite input path, which is no matter about what to use scheduler.
 			case HDFS:
-//				pathPrefix = JobConfiguration.getPathHDFSPrefix();
-//				tmppath[i] = pathPrefix+ "/" + ts.getTaskId() +"inputPath"+i;
+
 				formerTask = channel.getFrom();
 				tmppath[i] = formerTask.getTaskId() + "::outputPath::" + formerTask.getOutputChannel().indexOf(channel);
 				break;
@@ -26,12 +25,17 @@ public class InterNodePath {
 				break;
 			//if transmit type is MSG, which means using Msg from one Task to this one, and it is dependent upon former task. 
 			case MESSAGE:
-				pathPrefix = JobConfiguration.getMsgHeader();
+				//pathPrefix = JobConfiguration.getMsgHeader();
 				formerTask = channel.getFrom();
-				tmppath[i] = pathPrefix + formerTask.getTaskId() + "::outputPath::" + formerTask.getOutputChannel().indexOf(channel);
+				tmppath[i] =  formerTask.getTaskId() + "::outputPath::" + formerTask.getOutputChannel().indexOf(channel);
+				break;
+			case DIST_MEMORY:
+				formerTask = channel.getFrom();
+				tmppath[i] =  formerTask.getTaskId() + "::outputPath::" + formerTask.getOutputChannel().indexOf(channel);
 				break;
 			default:
-				System.err.println(channel.getTransType().toString() + " cannot be tranformered into a path.");
+				formerTask = channel.getFrom();
+				tmppath[i] =  formerTask.getTaskId() + "::outputPath::" + formerTask.getOutputChannel().indexOf(channel);
 			}
 		}
 		return tmppath;
@@ -56,6 +60,10 @@ public class InterNodePath {
 					pathPrefix = JobConfiguration.getMsgHeader() + JobConfiguration.getCreateTime() + "-";
 					tmppath[i] = pathPrefix + ts.getTaskId() + "outputPath" + i;
 					break;
+				case DIST_MEMORY:
+					pathPrefix = JobConfiguration.getDistMemHeader() + JobConfiguration.getCreateTime() + "-";
+					tmppath[i] = pathPrefix + ts.getTaskId() + "outputPath" + i;
+					break;	
 			}
 			
 		}

@@ -102,26 +102,6 @@ public class ChannelManager {
 				tmppath = InterNodePath.partitionInputPath(ints);
 				ints.setInputPath(tmppath);
 			}
-			// else {
-			//
-			// }
-			//
-			// pathPrefix = JobConfiguration.getPathHDFSPrefix();
-			// if (ints.getDepTaskMap() == null) {
-			// //this is used to add depende
-			//
-			// String[] s = new String[ints.getDepTaskMap().size()];
-			// Set<String> set = ints.getDepTaskMap().keySet();
-			// Iterator ite = set.iterator();
-			// int i = 0;
-			// while (ite.hasNext()) {
-			// String key = (String) ite.next();
-			// s[i] = pathPrefix + "/" + key.trim() + "outputPath"
-			// + (ints.getDepTaskMap().get(key)).intValue();
-			// i++;
-			// }
-			// ints.setInputPath(s);
-			// }
 			finalList.put(ints.getTaskId(), ints);
 
 		}
